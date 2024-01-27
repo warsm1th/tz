@@ -25,7 +25,6 @@ function validation(form){
         removeError(input);
         if(input === document.getElementById('phone')){
             let value = Number(input.value.replace(/[^\d]/g, ''));
-            console.log(value);
             if (value == ""){
                 createError(input, 'Укажите номер телефона!');
                 result = false;
@@ -70,6 +69,20 @@ function validation(form){
 document.getElementById('add-form').addEventListener('submit', function(event){
     event.preventDefault();
     if (validation(this) == true){
-        alert('Форма проверена успешно!')
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://localhost/tz/index.php", true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.send(`name=${document.getElementById('name').value}
+        &email=${document.getElementById('email').value.toLowerCase()}
+        &phone=${Number(document.getElementById('phone').value.replace(/[^\d]/g, ''))}`);
+
+        xhr.onreadystatechange = function ()
+        {
+            if (this.readyState === XMLHttpRequest.DONE && this.status === 200)
+            {
+                console.log(this.responseText)
+                document.getElementById("info").innerHTML = this.responseText;
+            }
+        }
     }
 })
