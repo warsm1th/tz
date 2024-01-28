@@ -20,7 +20,7 @@ if ($validation->getErrors() == ""){
     if ($row = $stmt->fetch(PDO::FETCH_LAZY)){
         if ($row['name'] == $name && $row['email'] == $email && $row['phone'] == $phone){
             echo "<p style='color: red'>Данный пользователь уже существует!</p>";
-            header("HTTP/1.1 203 OK");
+            header("HTTP/1.1 200 OK");
         }
         
         elseif ($row['email'] == $email || $row['phone'] == $phone){

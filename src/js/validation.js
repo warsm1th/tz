@@ -66,10 +66,13 @@ function validation(form){
 
 }
 
+let time = new Date().getTime() / 1000;
+
 document.getElementById('add-form').addEventListener('submit', function(event){
     event.preventDefault();
     let info = document.getElementById("info");
     info.innerHTML = "";
+
 
     if (validation(this) == true){
 
@@ -95,6 +98,17 @@ document.getElementById('add-form').addEventListener('submit', function(event){
             else if (this.readyState === 4 && this.status === 203)
             {
                 info.innerHTML = this.responseText;
+            }
+
+            else if (this.readyState === 4 && this.status === 200)
+            {
+                let time2 = new Date().getTime() / 1000;
+                if (time2-time < 300){
+                    info.innerHTML = "<p style='color: red'>Превышен интервал запросов.</p>";
+                }
+                else {
+                    info.innerHTML = this.responseText;
+                }
             }
         }
     }
