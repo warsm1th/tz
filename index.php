@@ -18,14 +18,24 @@ if ($validation->getErrors() == ""){
     $stmt->execute(['email'=>$email, 'phone'=>$phone]);
 
     if ($row = $stmt->fetch(PDO::FETCH_LAZY)){
-        echo "<p style='color: red'>Пользователь с этими данными уже существует!</p>";
+        if ($row['name'] == $name && $row['email'] == $email && $row['phone'] == $phone){
+            echo "<p style='color: red'>Данный пользователь уже существует!</p>";
+            header("HTTP/1.1 203 OK");
+        }
+        
+        elseif ($row['email'] == $email || $row['phone'] == $phone){
+            echo "<p style='color: red'>Данный email/телефон уже зарегистрирован в системе!</p>";
+            header("HTTP/1.1 203 OK");
+        }
     }
     else {
         $reg = $conn->prepare('INSERT INTO users VALUES (NULL, :name, :email, :phone)');
         $reg->execute(['name'=>$name, 'email'=>$email, 'phone'=>$phone]);
+        header("HTTP/1.1 201 OK");
         echo "<p style='color: green'>Регистрация успешно завершена!</p>";
     }
 }
-else{
+else {
+    header("HTTP/1.1 203 OK");
     echo "<p style='color: red'>{$validation->getErrors()}</p>";
 }

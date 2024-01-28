@@ -68,7 +68,11 @@ function validation(form){
 
 document.getElementById('add-form').addEventListener('submit', function(event){
     event.preventDefault();
+    let info = document.getElementById("info");
+    info.innerHTML = "";
+
     if (validation(this) == true){
+
         let xhr = new XMLHttpRequest();
 
         xhr.open("POST", "http://localhost/tz/index.php", true);
@@ -82,10 +86,15 @@ document.getElementById('add-form').addEventListener('submit', function(event){
 
         xhr.onreadystatechange = function ()
         {
-            if (this.readyState === 4 && this.status === 200)
+            if (this.readyState === 4 && this.status === 201)
             {
-                console.log(this.responseText)
-                document.getElementById("info").innerHTML = this.responseText;
+                info.innerHTML = this.responseText;
+                info.nextElementSibling.style.display = "none";
+            }
+
+            else if (this.readyState === 4 && this.status === 203)
+            {
+                info.innerHTML = this.responseText;
             }
         }
     }

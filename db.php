@@ -5,7 +5,7 @@ class Database
     // данные для подключения к БД
     private $username = "bebeg";
     private $password = "Memefrog_6277";
-    private $attr = "mysql:host=localhost;dbname=dbase1";
+    private $attr = "mysql:host=localhost;dbname=dbase2";
     public $conn;
 
     // получение соединения с базой данных
