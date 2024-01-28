@@ -4,24 +4,19 @@
     <meta charset="UTF-8">
     <title>Регистрация</title>
     <link rel="stylesheet" href="src/css/style.css">
-    <script>
-
-    </script>
 </head>
 <body>
     <div class="container">
         <h2>Регистрация<br></h2>
-        <form class="form" action="index.php" id="add-form" method="post">
+        <div id="info" class="info"></div>
+        <form class="form" id="add-form" method="post">
         <div class="input-box"><input id="name" class="input-field" placeholder="Имя" name="name"></div>
         <div class="input-box"><input id="email" class="input-field" placeholder="Email" name="email"></div>
         <div class="input-box"><input type="tel"id="phone" class="input-field" placeholder="Телефон" name="phone"></div>
         <button type="submit" class="send-btn">Отправить</button>
-        <div id="info"></div>
         </form>
     </div>
-
     <script defer src="src/js/validation.js"></script>
     <script defer src="src/js/mask.js"></script>
-
   </body>
 </html>

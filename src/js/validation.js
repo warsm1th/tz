@@ -70,15 +70,19 @@ document.getElementById('add-form').addEventListener('submit', function(event){
     event.preventDefault();
     if (validation(this) == true){
         let xhr = new XMLHttpRequest();
+
         xhr.open("POST", "http://localhost/tz/index.php", true);
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhr.send(`name=${document.getElementById('name').value}
+
+        let data = `name=${document.getElementById('name').value}
         &email=${document.getElementById('email').value.toLowerCase()}
-        &phone=${Number(document.getElementById('phone').value.replace(/[^\d]/g, ''))}`);
+        &phone=${Number(document.getElementById('phone').value.replace(/[^\d]/g, ''))}`;
+
+        xhr.send(data);
 
         xhr.onreadystatechange = function ()
         {
-            if (this.readyState === XMLHttpRequest.DONE && this.status === 200)
+            if (this.readyState === 4 && this.status === 200)
             {
                 console.log(this.responseText)
                 document.getElementById("info").innerHTML = this.responseText;
