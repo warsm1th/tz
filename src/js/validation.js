@@ -78,7 +78,7 @@ document.getElementById('add-form').addEventListener('submit', function(event){
 
         let xhr = new XMLHttpRequest();
 
-        xhr.open("POST", "http://localhost/tz/controller.php", true);
+        xhr.open("POST", "http://localhost/tz/controllers/registerController.php", true);
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
         let data = `name=${document.getElementById('name').value}

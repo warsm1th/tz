@@ -1,9 +1,9 @@
 <?php
 
-require_once 'db.php';
-require_once 'validation.php';
+require_once '../functions/db.php';
+require_once '../functions/validation.php';
 
-class Model
+class Register
 {
     private $result;
     function __construct($arr)
@@ -14,7 +14,7 @@ class Model
             $email = $arr['email'];
             $phone = $arr['phone'];
 
-            $db = new Database;
+            $db = new Database();
             $conn = $db->getConnection();
 
             $stmt = $conn->prepare('SELECT * FROM users WHERE email = :email OR phone = :phone');
